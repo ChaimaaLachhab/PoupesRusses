@@ -2,25 +2,31 @@ class PoupeeRusse extends Poupee {
 
     private String name;
 
-    private PoupeeRusse intoPoupee;
+    private PoupeeRusse containDoll;
+    private PoupeeRusse intoDoll;
 
-    public PoupeeRusse getPoupee() {return intoPoupee;}
+    public PoupeeRusse getIntoDoll() {return intoDoll;}
 
-    public void setPoupee(PoupeeRusse poupee) {this.intoPoupee = poupee; }
+    public void setIntoDoll(PoupeeRusse dol) {this.intoDoll = dol;}
+
+    public PoupeeRusse getContainDoll() {return containDoll;}
+
+    public void setContainDoll(PoupeeRusse p) {this.containDoll = p; }
 
     public PoupeeRusse(String name, boolean isOpen, int taille) {
         super(taille,isOpen);
         this.name=name;
-        intoPoupee = null;
+        containDoll = null;
+        intoDoll=null;
     }
 
     @Override
     public void open() {
         if (!isOpen()) {
             setOpen(true);
-            System.out.println("doll is open now");
+            System.out.println(this.name+" is open now");
         }else{
-            System.out.println("is already open!!");
+            System.out.println(this.name+" is already open!!");
         }
     }
 
@@ -28,9 +34,9 @@ class PoupeeRusse extends Poupee {
     public void close() {
         if (isOpen()) {
             setOpen(false);
-            System.out.println("doll is close now");
+            System.out.println(this.name+" is close now");
         }else{
-            System.out.println("Is already close!!");
+            System.out.println(this.name+" is already close!!");
         }
     }
 
@@ -38,14 +44,19 @@ class PoupeeRusse extends Poupee {
     public void placeIn(Poupee P) {
         PoupeeRusse p=(PoupeeRusse) P;
         if (!P.isOpen()) {
-            System.out.println("impossible, this doll is close");
-        } else if (intoPoupee!=null){
-            System.out.println("impossible, this doll is Full");
-        } else if(this.getTaille() >= P.getTaille()) {
-            System.out.println("impossible, this doll is so small ");
+            System.out.println("impossible, this "+p.name+" is close");
+        } else if (p.getContainDoll()!=null){
+            System.out.println("impossible, this "+p.name+" is Full");
+        } else if (this.getIntoDoll() != null){
+            System.out.println("this "+this.getName()+" deja dans la poupée "+this.getIntoDoll().getName());
+        }   else if(this.getTaille() >= P.getTaille()) {
+            System.out.println("impossible, this "+p.getName()+" is so small ");
         } else {
-            ((PoupeeRusse) P).setPoupee(this);
-            System.out.println("le poupee "+this.name+" est placee dans la poupee "+p.name);
+            //doll is alredy in another doll
+            this.setIntoDoll(p);
+            //doll mother is full
+            p.setContainDoll(this);
+            System.out.println(this.name+" est placee dans la poupee "+p.name);
         }
     }
 
@@ -53,16 +64,22 @@ class PoupeeRusse extends Poupee {
     public void getOutOf(Poupee P) {
         PoupeeRusse p=(PoupeeRusse) P;
         if (!P.isOpen()) {
-            System.out.println("impossible, this doll is closee");
-        } else if(intoPoupee==null) {
-            System.out.println("impossible, this doll is empty");
-        }else {
-            setPoupee(null);
-            System.out.println("le poupee"+this.name+" est placee out la poupee "+p.name);
+            System.out.println("impossible, this "+p.name+" is closee");
+        } else if(p.getContainDoll()==null) {
+            System.out.println("impossible, this "+p.name+" is empty");
+        }else if (this.getIntoDoll() == null){
+            System.out.println("this "+this.getName()+" n'est jamais placer dans une autre!");
+        }   else {
+            //doll daughter is alredy in another doll
+            this.setIntoDoll(null);
+            //doll mother is full
+            p.setContainDoll(null);
+            System.out.println(this.name+" est placee out la poupee "+p.name);
         }
     }
 
     public String getName() {
         return name;
     }
+
 }
