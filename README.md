@@ -14,16 +14,16 @@ Dans cette section, les classes fondamentales de la hiérarchie des poupées rus
 - Les propriétés sont encapsulées et accessibles via des méthodes.
 - Doit avoir les méthodes abstraites suivantes :
 
-    1. `void ouvrir()`: Ouvre la poupée.
-    2. `void fermer()`: Ferme la poupée.
-    3. `void placerDans(Poupee p)`: Place la poupée courante dans la poupée `p`.
-    4. `void sortirDe(Poupee p)`: Retire la poupée courante de la poupée `p`.
+    1. `void open()`: Ouvre la poupée.
+    2. `void close()`: Ferme la poupée.
+    3. `void placeIn(Poupee P)`: Place la poupée courante dans la poupée `P`.
+    4. `void getOutOf(Poupee P)`: Retire la poupée courante de la poupée `P`.
 
 ### Classe Concrète: PoupéeRusse
 
 - Hérite de la classe de base Poupee et implémente les méthodes spécifiques.
 - Le constructeur de PoupéeRusse doit appeler le constructeur de la classe de base.
-- Les méthodes `ouvrir`, `fermer`, `placerDans` et `sortirDe` doivent être implémentées selon les spécifications de la classe de base.
+- Les méthodes `open`, `close`, `placeIn` et `getOutOf` doivent être implémentées selon les spécifications de la classe de base.
 
 ## Partie 2: Conception UML
 
